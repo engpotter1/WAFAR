@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>موقعي الاحترافي</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap');
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: #0a0a0a;
+    color: #fff;
+    overflow-x: hidden;
+  }
+
+  /* ===== NAVBAR ===== */
+  nav {
+    position: fixed; top:0; width:100%; padding: 20px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    z-index: 1000;
+    background: rgba(10,10,10,0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .logo {
+    font-size: 28px; font-weight: 900;
+    background: linear-gradient(135deg, #00f0ff, #7b2ff7);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  nav ul { list-style: none; display: flex; gap: 35px; }
+  nav ul li a {
+    color: #aaa; text-decoration: none; font-size: 16px;
+    transition: 0.3s; position: relative;
+  }
+  nav ul li a:hover { color: #00f0ff; }
+  nav ul li a::after {
+    content:''; position:absolute; bottom:-5px; right:0;
+    width:0; height:2px; background:#00f0ff; transition:0.3s;
+  }
+  nav ul li a:hover::after { width:100%; }
+
+  /* ===== HERO ===== */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    justify-content: center; text-align: center;
+    position: relative; padding: 0 20px;
+  }
+  .hero::before {
+    content:''; position:absolute; width:600px; height:600px;
+    background: radial-gradient(circle, rgba(123,47,247,0.3), transparent 70%);
+    top: 10%; left: 10%; border-radius: 50%; filter: blur(80px);
+    animation: float 6s ease-in-out infinite;
+  }
+  .hero::after {
+    content:''; position:absolute; width:500px; height:500px;
+    background: radial-gradient(circle, rgba(0,240,255,0.2), transparent 70%);
+    bottom: 10%; right: 10%; border-radius: 50%; filter: blur(80px);
+    animation: float 8s ease-in-out infinite reverse;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-40px) scale(1.1); }
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero h1 {
+    font-size: clamp(36px, 7vw, 80px); font-weight: 900;
+    line-height: 1.2; margin-bottom: 20px;
+  }
+  .hero h1 span {
+    background: linear-gradient(135deg, #00f0ff, #7b2ff7, #ff2d95);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero p {
+    font-size: 20px; color: #888; max-width: 600px;
+    margin: 0 auto 40px;
+  }
+  .btn {
+    display: inline-block; padding: 16px 45px;
+    background: linear-gradient(135deg, #7b2ff7, #00f0ff);
+    color: #fff; text-decoration: none; border-radius: 50px;
+    font-size: 18px; font-weight: 700; border: none; cursor: pointer;
+    transition: 0.4s; position: relative; overflow: hidden;
+  }
+  .btn:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(123,47,247,0.4); }
+  .btn-outline {
+    background: transparent; border: 2px solid #7b2ff7;
+    margin-right: 15px;
+  }
+  .btn-outline:hover { background: #7b2ff7; }
+
+  /* ===== STATS ===== */
+  .stats {
+    display: flex; justify-content: center; gap: 60px;
+    padding: 60px 20px; flex-wrap: wrap;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .stat { text-align: center; }
+  .stat h2 {
+    font-size: 48px; font-weight: 900;
+    background: linear-gradient(135deg, #00f0ff, #7b2ff7);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .stat p { color: #666; font-size: 16px; margin-top: 5px; }
+
+  /* ===== SERVICES ===== */
+  .services { padding: 100px 60px; }
+  .section-title {
+    text-align: center; font-size: 42px; font-weight: 900;
+    margin-bottom: 60px;
+  }
+  .section-title span {
+    background: linear-gradient(135deg, #00f0ff, #7b2ff7);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .cards {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px; max-width: 1200px; margin: 0 auto;
+  }
+  .card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px; padding: 40px;
+    transition: 0.4s; position: relative; overflow: hidden;
+  }
+  .card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(123,47,247,0.3);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+  }
+  .card::before {
+    content:''; position:absolute; top:0; right:0;
+    width:100px; height:100px;
+    background: radial-gradient(circle, rgba(0,240,255,0.1), transparent);
+    border-radius: 50%;
+  }
+  .card-icon {
+    font-size: 50px; margin-bottom: 20px; display: block;
+  }
+  .card h3 { font-size: 24px; margin-bottom: 15px; }
+  .card p { color: #777; line-height: 1.8; }
+
+  /* ===== PORTFOLIO ===== */
+  .portfolio { padding: 100px 60px; background: rgba(255,255,255,0.01); }
+  .portfolio-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 25px; max-width: 1200px; margin: 0 auto;
+  }
+  .portfolio-item {
+    height: 280px; border-radius: 20px; overflow: hidden;
+    position: relative; cursor: pointer;
+  }
+  .portfolio-item:nth-child(1) { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+  .portfolio-item:nth-child(2) { background: linear-gradient(135deg, #0f3460, #533483); }
+  .portfolio-item:nth-child(3) { background: linear-gradient(135deg, #2d132c, #801336); }
+  .portfolio-item:nth-child(4) { background: linear-gradient(135deg, #1b262c, #0f4c75); }
+  .portfolio-item:nth-child(5) { background: linear-gradient(135deg, #2c003e, #512b58); }
+  .portfolio-item:nth-child(6) { background: linear-gradient(135deg, #1a1a2e, #e94560); }
+  .portfolio-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    opacity: 0; transition: 0.4s;
+  }
+  .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+  .portfolio-overlay h3 { font-size: 22px; margin-bottom: 8px; }
+  .portfolio-overlay p { color: #00f0ff; font-size: 14px; }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials { padding: 100px 60px; }
+  .test-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px; max-width: 1000px; margin: 0 auto;
+  }
+  .test-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px; padding: 35px;
+  }
+  .test-card .stars { color: #f5a623; font-size: 20px; margin-bottom: 15px; }
+  .test-card p { color: #999; line-height: 1.9; margin-bottom: 20px; font-style: italic; }
+  .test-author { display: flex; align-items: center; gap: 15px; }
+  .test-avatar {
+    width: 50px; height: 50px; border-radius: 50%;
+    background: linear-gradient(135deg, #7b2ff7, #00f0ff);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 900;
+  }
+  .test-author h4 { font-size: 16px; }
+  .test-author span { color: #666; font-size: 13px; }
+
+  /* ===== CONTACT ===== */
+  .contact { padding: 100px 60px; }
+  .contact-wrapper {
+    max-width: 700px; margin: 0 auto;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 25px; padding: 50px;
+  }
+  .contact-wrapper input,
+  .contact-wrapper textarea {
+    width: 100%; padding: 16px 20px; margin-bottom: 20px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px; color: #fff; font-size: 16px;
+    font-family: 'Cairo', sans-serif; outline: none;
+    transition: 0.3s;
+  }
+  .contact-wrapper input:focus,
+  .contact-wrapper textarea:focus {
+    border-color: #7b2ff7;
+    box-shadow: 0 0 20px rgba(123,47,247,0.2);
+  }
+  .contact-wrapper textarea { height: 150px; resize: vertical; }
+  .contact-wrapper .btn { width: 100%; text-align: center; font-family: 'Cairo'; }
+
+  /* ===== FOOTER ===== */
+  footer {
+    text-align: center; padding: 40px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    color: #444; font-size: 14px;
+  }
+  footer span {
+    background: linear-gradient(135deg, #00f0ff, #7b2ff7);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    font-weight: 700;
+  }
+
+  /* ===== SCROLL ANIMATIONS ===== */
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.active { opacity: 1; transform: translateY(0); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    nav { padding: 15px 20px; }
+    nav ul { gap: 15px; }
+    nav ul li a { font-size: 13px; }
+    .services, .portfolio, .testimonials, .contact { padding: 60px 20px; }
+    .stats { gap: 30px; }
+    .stat h2 { font-size: 36px; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">DEV✦STUDIO</div>
+  <ul>
+    <li><a href="#home">الرئيسية</a></li>
+    <li><a href="#services">خدماتنا</a></li>
+    <li><a href="#portfolio">أعمالنا</a></li>
+    <li><a href="#contact">تواصل</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>نصنع لك <span>تجربة رقمية</span><br>لا تُنسى</h1>
+    <p>نحوّل أفكارك إلى مواقع وتطبيقات مذهلة بأحدث التقنيات وأجمل التصاميم</p>
+    <a href="#contact" class="btn">ابدأ مشروعك 🚀</a>
+    <a href="#portfolio" class="btn btn-outline">شوف أعمالنا</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="stat reveal"><h2 id="s1">0</h2><p>مشروع مكتمل</p></div>
+  <div class="stat reveal"><h2 id="s2">0</h2><p>عميل سعيد</p></div>
+  <div class="stat reveal"><h2 id="s3">0</h2><p>سنة خبرة</p></div>
+  <div class="stat reveal"><h2 id="s4">0</h2><p>جائزة تصميم</p></div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <h2 class="section-title reveal">خدماتنا <span>المميزة</span></h2>
+  <div class="cards">
+    <div class="card reveal">
+      <span class="card-icon">🎨</span>
+      <h3>تصميم UI/UX</h3>
+      <p>تصاميم عصرية وتجربة مستخدم سلسة تخلي الزائر مش عايز يمشي من موقعك</p>
+    </div>
+    <div class="card reveal">
+      <span class="card-icon">💻</span>
+      <h3>تطوير المواقع</h3>
+      <p>مواقع سريعة ومتجاوبة مع كل الأجهزة بأحدث تقنيات الويب</p>
+    </div>
+    <div class="card reveal">
+      <span class="card-icon">📱</span>
+      <h3>تطبيقات الموبايل</h3>
+      <p>تطبيقات iOS و Android بأداء خرافي وتصميم يخطف العين</p>
+    </div>
+    <div class="card reveal">
+      <span class="card-icon">🚀</span>
+      <h3>التسويق الرقمي</h3>
+      <p>استراتيجيات تسويق ذكية توصلك لعملائك المستهدفين بسرعة</p>
+    </div>
+    <div class="card reveal">
+      <span class="card-icon">🛒</span>
+      <h3>متاجر إلكترونية</h3>
+      <p>متاجر متكاملة ببوابات دفع آمنة ونظام إدارة سهل</p>
+    </div>
+    <div class="card reveal">
+      <span class="card-icon">🔒</span>
+      <h3>الأمن السيبراني</h3>
+      <p>حماية كاملة لبياناتك ومواقعك من أي تهديدات إلكترونية</p>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <h2 class="section-title reveal">أحدث <span>أعمالنا</span></h2>
+  <div class="portfolio-grid">
+    <div class="portfolio-item reveal">
+      <div class="portfolio-overlay"><h3>متجر فاشن</h3><p>متجر إلكتروني</p></div>
+    </div>
+    <div class="portfolio-item reveal">
+      <div class="portfolio-overlay"><h3>تطبيق صحي</h3><p>تطبيق موبايل</p></div>
+    </div>
+    <div class="portfolio-item reveal">
+      <div class="portfolio-overlay"><h3>منصة تعليمية</h3><p>موقع ويب</p></div>
+    </div>
+    <div class="portfolio-item reveal">
+      <div class="portfolio-overlay"><h3>داشبورد</h3><p>لوحة تحكم</p></div>
+    </div>
+    <div class="portfolio-item reveal">
+      <div class="portfolio-overlay"><h3>تطبيق توصيل</h3><p>تطبيق موبايل</p></div>
+    </div>
+    <div class="portfolio-item reveal">
+      <div class="portfolio-overlay"><h3>موقع شركة</h3><p>Corporate</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <h2 class="section-title reveal">عملاؤنا <span>بيقولوا إيه</span></h2>
+  <div class="test-grid">
+    <div class="test-card reveal">
+      <div class="stars">★★★★★</div>
+      <p>"أفضل فريق تعاملت معاه! الموقع طلع أحلى من اللي كنت متخيله بمراحل والشغل تم قبل الميعاد"</p>
+      <div class="test-author">
+        <div class="test-avatar">أ</div>
+        <div><h4>أحمد محمد</h4><span>CEO - شركة تقنية</span></div>
+      </div>
+    </div>
+    <div class="test-card reveal">
+      <div class="stars">★★★★★</div>
+      <p>"المتجر الإلكتروني بتاعي زادت مبيعاته 300% بعد ما عملوا ليا تصميم جديد. شغل احترافي جداً"</p>
+      <div class="test-author">
+        <div class="test-avatar">س</div>
+        <div><h4>سارة علي</h4><span>صاحبة براند أزياء</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h2 class="section-title reveal">تواصل <span>معنا</span></h2>
+  <div class="contact-wrapper reveal">
+    <input type="text" placeholder="الاسم الكامل">
+    <input type="email" placeholder="البريد الإلكتروني">
+    <input type="text" placeholder="الموضوع">
+    <textarea placeholder="رسالتك..."></textarea>
+    <button class="btn" onclick="alert('تم الإرسال بنجاح! ✅ هنتواصل معاك قريب')">إرسال الرسالة ✉️</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>DEV✦STUDIO</span> — جميع الحقوق محفوظة ❤️</p>
+</footer>
+
+<script>
+  // Scroll Reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Counter Animation
+  function animateCounter(id, target, suffix='+') {
+    let el = document.getElementById(id);
+    let current = 0;
+    let step = Math.ceil(target / 60);
+    let timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = current + suffix;
+    }, 30);
+  }
+  let statsDone = false;
+  const statsObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !statsDone) {
+      statsDone = true;
+      animateCounter('s1', 250);
+      animateCounter('s2', 180);
+      animateCounter('s3', 8);
+      animateCounter('s4', 15);
+    }
+  });
+  statsObs.observe(document.querySelector('.stats'));
+
+  // Smooth Scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior:'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>
